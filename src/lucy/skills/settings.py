@@ -7,4 +7,3 @@ VOL=2.0
 RATE=150
 VOICE='english'
 
-__version__ = "1.0.0-beta"

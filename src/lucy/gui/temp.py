@@ -1,7 +1,7 @@
-from multiprocessing import Process, Pipe,Value,Queue
+from multiprocessing import Process, Queue
 
-from lucy.utils.Enumerations import FaceExEnum
-from face_ex import FaceEx, FaceExEngine
+from lucy.enumerations import FaceExEnum
+from face_ex import FaceExEngine
 
 
 if __name__ == '__main__':

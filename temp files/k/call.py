@@ -79,7 +79,7 @@ def output(st):
             webbrowser.open_new_tab("https://www.facebook.com")
 
         elif 'send' in st and 'email' in st:
-            from lucy.skills.gmail import Mail
+            from lucy.skills.skills_collection.gmail import Mail
             Mail.emails()
             
         elif 'maker' in st:

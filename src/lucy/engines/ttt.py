@@ -45,7 +45,7 @@ class TTTEngine:
         except EOFError as e:
             self.console_manager.console_output(error_log='Failed to recognize user input with message: {0}'.format(e))
 
-    def assistant_response(self, message, refresh_console=True):
+    def say(self, message, refresh_console=True):
         """
         Assistant response in voice or/and in text.
         :param refresh_console: boolean

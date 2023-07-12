@@ -4,9 +4,9 @@ import logging
 import pyttsx3
 import queue
 
-from src.lucy.core.console import ConsoleManager
+from lucy.core.console import ConsoleManager
 
-from src.lucy import settings
+from lucy import settings
 
 
 class TTS:

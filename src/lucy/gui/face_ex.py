@@ -1,14 +1,12 @@
 import math
 import sys
-import time
 import pygame
 import pygame.camera
 import pygame.image
-import time
 from datetime import datetime, timedelta
 from lucy.services.news import NewsGenerator
-from lucy.utils.Enumerations import FaceExEnum
-from  multiprocessing import Queue
+from lucy.enumerations import FaceExEnum
+
 red = (255,0,0)
 blue = (40,150,203)
 green = (0,255,0)

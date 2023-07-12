@@ -12,7 +12,7 @@ import time
 from google import search
 import RPi.GPIO as GPIO
 from datetime import datetime
-from lucy.core.move import move
+from lucy.core.lucy import move
 from mic import mic
 from f2 import express as ex
 import multiprocessing as mp

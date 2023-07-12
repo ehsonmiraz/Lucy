@@ -22,7 +22,7 @@
 
 import os
 
-from src.lucy.settings import __version__
+from lucy.settings import __version__
 
 
 class OutputStyler:
@@ -41,7 +41,7 @@ user_input = OutputStyler.CYAN + ':-$ ' + OutputStyler.ENDC
 
 DASH = '='
 
-jarvis_logo = "\n" \
+bot_logo = "\n" \
               " ║██      ╗ ██   ██╗ ███████╗   ██╗    ╗██\n" \
               " ║██      ║ ██   ██╗ ██╔══╗      ██   ██    ══╝\n" \
               " ║██      ║ ██  ║██  ██           ║█  █║    \n" \

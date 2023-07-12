@@ -6,7 +6,7 @@ import webbrowser
 import time
 from google import search
 from datetime import datetime
-from lucy.core.move import move
+from lucy.core.lucy import move
 from mic import mic
 
 

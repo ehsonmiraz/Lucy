@@ -3,10 +3,7 @@
 
 # Face Recognition with OpenCV
 
-# To detect faces, I will use the code from my previous article on [face detection](https://www.superdatascience.com/opencv-face-detection/). So if you have not read it, I encourage you to do so to understand how face detection works and its Python coding. 
-
-
-
+# To detect faces, I will use the code from my previous article on [face detection](https://www.superdatascience.com/opencv-face-detection/). So if you have not read it, I encourage you to do so to understand how face detection works and its Python coding.
 #import numpy to convert python lists to numpy arrays as
 
 import cv2
@@ -143,7 +140,9 @@ class FaceRecognition:
 
        return predicted_img
 
-     def capture(self,name):
+     def get_id_and_subjects(self):
+              pass
+     def capture_And_save_face(self,name):
          cam = cv2.VideoCapture(1)
          detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
          Id = str(len(open("faces.txt", 'r').read().split("*")))
@@ -186,7 +185,7 @@ class FaceRecognition:
          f.close()
          cv2.destroyAllWindows()
 if __name__=='__main__':
-  print(FaceRecognition().capture("Ehsoon"))
+  print(FaceRecognition().capture_And_save_face("Ehsoon"))
 
 
 

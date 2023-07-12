@@ -25,7 +25,7 @@ import os
 import psutil
 import logging
 
-from lucy.utils.console import jarvis_logo, start_text, OutputStyler
+from lucy.utils.console import bot_logo, start_text, OutputStyler
 
 
 class ConsoleManager:
@@ -82,7 +82,7 @@ class ConsoleManager:
             # ----------------------------------------------------------------------------------------------------------
             # Logo sector
             # ----------------------------------------------------------------------------------------------------------
-            self._stdout_print(jarvis_logo + start_text)
+            self._stdout_print(bot_logo + start_text)
             print(OutputStyler.BOLD +
                   'RAM USAGE: {0:.2f} GB'.format(self._get_memory()) + OutputStyler.ENDC)
 

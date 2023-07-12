@@ -1,5 +1,6 @@
-from google import google
-num_page = 3
-search_results = google.search("david beckham", num_page)
-for result in search_results:
-    print(result.description)
+from googlesearch import search,get_page
+
+query = "studytonight"
+
+for i in search(query, tld="co.in", num=10, stop=10, pause=2):
+    print(get_page(i).)

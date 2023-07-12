@@ -1,28 +1,29 @@
+import lucy
 import RPi.GPIO as gpio
 import time
 from lucy.core.console import ConsoleManager as cm
 from lucy.engines.stt import STTEngine
 from lucy.engines.tts import TTSEngine
-from settings import *
+from lucy.core.settings import *
 class Move:
+  @staticmethod
+  def setup():
 
-  def __init__(self):
-    self.sttEngine=STTEngine()
     gpio.setmode(gpio.BOARD)
     gpio.setup(LEFT_WHEELS_FORWARD, gpio.OUT)
     gpio.setup(RIGHT_WHEELS_FORWARD, gpio.OUT)
     gpio.setup(RIGHT_WHEELS_BACKWARD, gpio.OUT)
     gpio.setup(LEFT_WHEELS_BACKWARD, gpio.OUT)
- 
-  def forward(self):
+  @staticmethod
+  def forward():
     gpio.output(LEFT_WHEELS_BACKWARD,False)
     gpio.output(RIGHT_WHEELS_BACKWARD,False)
     gpio.output(RIGHT_WHEELS_FORWARD,True)   
     gpio.output(LEFT_WHEELS_FORWARD,True)
     cm.console_output("Moving Forward.....",refresh_console=True)
 
- 
-  def right(self):
+  @staticmethod
+  def right():
 
    gpio.output(LEFT_WHEELS_BACKWARD, False)
    gpio.output(RIGHT_WHEELS_FORWARD, False) 
@@ -31,9 +32,9 @@ class Move:
    cm.console_output("Turning Left.....", refresh_console=True)
    time.sleep(TURNING_TIME)
    gpio.cleanup()
-   self.forward()
-
-  def left(self):
+   Move.forward()
+  @staticmethod
+  def left():
    gpio.output(RIGHT_WHEELS_BACKWARD, False)
    gpio.output(LEFT_WHEELS_FORWARD, False) 
    gpio.output(RIGHT_WHEELS_FORWARD, True)
@@ -41,43 +42,44 @@ class Move:
    cm.console_output("Turning Right.....", refresh_console=True)
    time.sleep(TURNING_TIME)
    gpio.cleanup()
-   self.forward()
+   Move.forward()
 
-  def backward(self):
+  def backward():
    gpio.output(LEFT_WHEELS_FORWARD, False)
    gpio.output(RIGHT_WHEELS_FORWARD, False) 
    gpio.output(RIGHT_WHEELS_BACKWARD, True)
    gpio.output(LEFT_WHEELS_BACKWARD, True)
    cm.console_output("Moving backward.....", refresh_console=True)
     
-  def stop(self):
+  def stop():
    try:   
     gpio.cleanup()
     cm.console_output("Stoppped", refresh_console=True)
    except Exception as e:
        cm.console_output("restarting....", refresh_console=True)
 
-
-  def run(self):
-   self.forward()
+  @staticmethod
+  def run():
+   Move.setup()
+   Move.forward()
    while True:
-      query=self.sttEngine.recognize_input()
+      query=lucy.sttEngine.recognize_input()
       if query in "turn right":
-          self.right()
+          Move.right()
       elif query in "turn left":
-          self.left()
+          Move.left()
       elif query in "now stop":
-          self.stop()
+          Move.stop()
       elif query in "move forward move straight go ahead":
-          self.forward()
+          Move.forward()
       elif query in "turn backward step back turn back":
-          self.backward()
+          Move.backward()
       elif query in "return done":
-          self.stop()
+          Move.stop()
           break
 
 if __name__=='__main__':
-  Move().run()
+  Move.run()
   print("moving")
       
      

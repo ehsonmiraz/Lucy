@@ -100,7 +100,7 @@ def detect_face(img):
     
     #load OpenCV face detector, I am using LBP which is fast
     #there is also a more accurate but slow Haar classifier
-    face_cascade = cv2.CascadeClassifier('opencv-files/lbpcascade_frontalface.xml')
+    face_cascade = cv2.CascadeClassifier('../src/lucy/services/facerec/opencv-files/lbpcascade_frontalface.xml')
 
     #let's detect multiscale (some images may be closer to camera than others) images
     #result is a list of faces
@@ -221,7 +221,7 @@ def prepare_training_data(data_folder_path):
 #one list will contain all the faces
 #and other list will contain respective labels for each face
 print("Preparing data...")
-faces, labels = prepare_training_data("training-data")
+faces, labels = prepare_training_data("../src/lucy/services/facerec/training-data")
 print("Data prepared")
 
 #print total faces and labels
