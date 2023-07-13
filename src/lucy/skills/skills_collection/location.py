@@ -24,19 +24,22 @@ import requests
 import json
 import logging
 
-from jarvis.settings import IPSTACK_API
-from jarvis.skills.collection.internet import InternetSkills
-from jarvis.skills.skill import AssistantSkill
+import lucy
+from lucy.core.console import ConsoleManager as cm
+from lucy.settings import IPSTACK_API
+from lucy.skills.skills_collection.internet import InternetSkills
+from lucy.skills.skill import AssistantSkill
 
 
-class LocationSkill(AssistantSkill):
+
+class LocationSkill():
 
     @classmethod
     def get_current_location(cls, **kwargs):
         location_results = cls.get_location()
         if location_results:
             city, latitude, longitude = location_results
-            cls.response("You are in {0}".format(city))
+            lucy.output_engine.say("You are in {0}".format(city))
     
     @classmethod
     def get_location(cls):
@@ -51,6 +54,6 @@ class LocationSkill(AssistantSkill):
         except Exception as e:
             if InternetSkills.internet_availability():
                 # If there is an error but the internet connect is good, then the location API has problem
-                cls.console(error_log=e)
+                cm.console(error_log=e)
                 logging.debug("Unable to get current location with error message: {0}".format(e))
                 return None

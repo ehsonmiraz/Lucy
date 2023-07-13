@@ -1,15 +1,57 @@
 from lucy.enumerations import *
-EMAIL_NAME="Charlie chaplin"
-EMAIL_USER="aeppe9504c@gmail.com"
-PASSWORD="rgzxaxijsgmymfht"
+
+EMAIL_CONFIG={
+'name':"Charlie chaplin",
+'user':"aeppe9504c@gmail.com",
+'password':"rgzxaxijsgmymfht",
+}
 
 # speach configurations
-VOL=2.0
-RATE=150
-VOICE='english'
+SPEECH_CONFIG={
+'vol':2.0,
+'rate':150,
+'voice':'english',
+}
+
+
+#
+SKILL_ANALYZER={
+    'senstivity':0.2
+}
 
 __version__ = "1.0.0-beta"
 ASSISTANT_NAME="LUCY"
 
 INPUTMODE=IntetrafceModesEnum.TextInput
 OUTPUTMODE=IntetrafceModesEnum.SpeechOutput
+
+
+"""
+Open weather map API settings
+Create key: https://openweathermap.org/appid
+
+"""
+WEATHER_API = {
+    'unit': 'celsius',
+    'key': None
+}
+
+
+"""
+WolframAlpha API settings
+Create key: https://developer.wolframalpha.com/portal/myapps/
+
+"""
+WOLFRAMALPHA_API = {
+    'key': None
+}
+
+
+"""
+IPSTACK API settings
+Create key: https://ipstack.com/signup/free
+
+"""
+IPSTACK_API = {
+    'key': None
+}

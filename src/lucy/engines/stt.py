@@ -59,7 +59,6 @@ class STTEngine:
         Capture the words from the recorded audio (audio stream --> free text).
         Transcribe speech from recorded from `microphone`.
         """
-        print(61)
         with self.microphone as source:
             self.recognizer.adjust_for_ambient_noise(source)
             audio = self.recognizer.listen(source)

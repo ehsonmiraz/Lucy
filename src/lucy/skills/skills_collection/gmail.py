@@ -1,14 +1,12 @@
 import lucy
 from lucy import engines
 import smtplib
-from lucy.settings import  *
+from lucy import settings
 from lucy.core.console import ConsoleManager
-
 class Mail:
    def __init__(self):
-       
-       self.email_user = EMAIL_USER
-       self.password   =  PASSWORD
+       self.email_user = settings.EMAIL_CONFIG.get('user')
+       self.password   =  settings.EMAIL_CONFIG.get('password')
        self.email_recepient=None
        self.server = smtplib.SMTP('smtp.gmail.com', 587)
        self.cm=ConsoleManager()
@@ -16,7 +14,7 @@ class Mail:
 
    def connect(self):
        try:
-           lucy.output_engine.say("loggin in as "+ EMAIL_NAME)
+           lucy.output_engine.say("loggin in as "+ self.email_user)
            self.server.ehlo()
            self.server.starttls()
            self.server.login(self.email_user, self.password)
@@ -27,7 +25,7 @@ class Mail:
            return False
        except Exception as e:
           lucy.output_engine("Something went wrong")
-          cm.console_output("error:"+ str(e))
+          self.cm.console_output("error:"+ str(e))
           return False
 
    def send_to_recepient(self, email_recepient,message):

@@ -31,9 +31,9 @@ class TTS:
         :return: gtts engine object
         """
         tts_engine = pyttsx3.init()
-        tts_engine.setProperty('rate', settings.RATE)  # Setting up new voice rate
-        tts_engine.setProperty('volume', settings.VOL)  # Setting up volume level  between 0 and 1
-        tts_engine.setProperty('voice', settings.VOICE)
+        tts_engine.setProperty('rate', settings.EMAIL_CONFIG.get('rate'))  # Setting up new voice rate
+        tts_engine.setProperty('volume',settings.EMAIL_CONFIG.get('volume')) # Setting up volume level  between 0 and 1
+        tts_engine.setProperty('voice', settings.EMAIL_CONFIG.get('voice'))
         return tts_engine
 
 

@@ -4,24 +4,19 @@ import lucy
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-from jarvis.skills.analyzer import SkillAnalyzer
-from jarvis.skills.registry import skill_objects
-from jarvis.core.nlp import ResponseCreator
-from jarvis.skills.collection.activation import ActivationSkills
-
-from jarvis.skills.collection.wolframalpha import WolframSkills
+from lucy.skills.analyzer import SkillAnalyzer
+from lucy.core.nlp import ResponseCreator
+from lucy.skills.skills_collection.activation import ActivationSkills
+from lucy import settings
+from lucy.core.console import ConsoleManager as cm
 
 
 class Processor:
-    def __init__(self, console_manager, settings_):
-        self.console_manager = console_manager
+    def __init__(self, settings_):
         self.settings = settings_
         self.response_creator = ResponseCreator()
         self.skill_analyzer = SkillAnalyzer(
-            weight_measure=TfidfVectorizer,
-            similarity_measure=cosine_similarity,
-            args=self.settings.SKILL_ANALYZER.get('args'),
-            sensitivity=self.settings.SKILL_ANALYZER.get('sensitivity'),
+
         )
 
     def run(self):
@@ -47,13 +42,12 @@ class Processor:
             # Positive answer
             # ---------------
             response = self.response_creator.create_positive_response(transcript)
-            jarvis.output_engine.assistant_response(response)
+            lucy.output_engine.assistant_response(response)
 
             # ---------------
             # Skill execution
             # ---------------
-            skill_to_execute = {'voice_transcript': transcript, 'skill': skill}
-            self._execute_skill(skill_to_execute)
+            self._execute_skill(skill)
 
         else:
             # ----------------------------------------------------------------------------------------------------------
@@ -64,37 +58,17 @@ class Processor:
             # Negative answer
             # ---------------
             response = self.response_creator.create_negative_response(transcript)
-            jarvis.output_engine.assistant_response(response)
+            lucy.output_engine.assistant_response(response)
 
-            # ---------------
-            # WolframAlpha API Call
-            # ---------------
-            skill_to_execute = {'voice_transcript': transcript,
-                                'skill': {'name': WolframSkills.call_wolframalpha.__name__}
-                                }
 
-            response = WolframSkills.call_wolframalpha(transcript)
-
-        # --------------------------------------------------------------------------------------------------------------
-        # Add new record to history
-        # --------------------------------------------------------------------------------------------------------------
-
-        record = {'user_transcript': transcript,
-                  'response': response if response else '--',
-                  'executed_skill': skill_to_execute if skill_to_execute else '--'
-                  }
-
-        db.insert_many_documents('history', [record])
 
     def _execute_skill(self, skill):
         if skill:
-            skill_func_name = skill.get('skill').get('func')
-            self.console_manager.console_output(info_log='Executing skill {0}'.format(skill_func_name))
+            skill_func_name = skill.get('func')
+            cm.console_output(info_log='Executing skill {0}'.format(skill_func_name))
             try:
-                ActivationSkills.enable_assistant()
-                skill_func_name = skill.get('skill').get('func')
                 skill_func = skill_objects[skill_func_name]
                 skill_func(**skill)
             except Exception as e:
-                self.console_manager.console_output(error_log="Failed to execute skill {0} with message: {1}"
+                cm.console_output(error_log="Failed to execute skill {0} with message: {1}"
                                                     .format(skill_func_name, e))
