@@ -29,7 +29,7 @@ class DatetimeSkills():
         now = datetime.now()
         hour, minute = now.hour, now.minute
         converted_time = cls._time_in_text(hour, minute)
-        lucy.output_engine.say('The current time is: {0}'.format(converted_time))
+        lucy.output_engine.respond('The current time is: {0}'.format(converted_time))
 
     @classmethod
     def tell_the_date(cls, **kwargs):
@@ -38,7 +38,7 @@ class DatetimeSkills():
         """
 
         today = date.today()
-        lucy.output_engine.say('The current date is: {0}'.format(today))
+        lucy.output_engine.respond('The current date is: {0}'.format(today))
 
     @classmethod
     def _get_12_hour_period(cls, hour):

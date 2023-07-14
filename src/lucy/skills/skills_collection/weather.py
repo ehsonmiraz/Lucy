@@ -1,73 +1,41 @@
-# MIT License
-
-# Copyright (c) 2019 Georgios Papachristou
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
 
 import re
 
 from pyowm import OWM
 
+import  lucy
 from lucy.settings import WEATHER_API
 from lucy.skills.skills_collection.location import LocationSkill
 from lucy.skills.skills_collection.internet import InternetSkills
-from lucy.skills.skill import AssistantSkill
+from lucy.core.console import ConsoleManager as cm
 
 
-class WeatherSkills(AssistantSkill):
-    
+class WeatherSkills:
     @classmethod
-    def tell_the_weather(cls, voice_transcript, skill):
-        """
-        Tells the weather of a place
-        :param tag: string (e.g 'weather')
-        :param voice_transcript: string (e.g 'weather in London')
-
-        NOTE: If you have the error: 'Reason: Unable to find the resource', try another location
-        e.g weather in London
-        """
-        tags = cls.extract_tags(voice_transcript, skill['tags'])
-        for tag in tags:
-            reg_ex = re.search(tag + ' [a-zA-Z][a-zA-Z] ([a-zA-Z]+)', voice_transcript)
-            try:
-                if WEATHER_API['key']:
-                    city = cls._get_city(reg_ex)
-                    if city:
-                        status, temperature = cls._get_weather_status_and_temperature(city)
-                        if status and temperature:
-                            cls.response("Current weather in %s is %s.\n"
+    def tell_the_weather(cls, subject):
+      try:
+        if WEATHER_API['key']:
+            city = cls._get_city(subject)
+            if city:
+                status, temperature = cls._get_weather_status_and_temperature(city)
+                if status and temperature:
+                        lucy.output_engine.respond("Current weather in %s is %s.\n"
                                          "The maximum temperature is %0.2f degree celcius. \n"
                                          "The minimum temperature is %0.2f degree celcius."
                                          % (city, status, temperature['temp_max'], temperature['temp_min'])
                                          )
-                        else:
-                            cls.response("Sorry the weather API is not available now..")
-                    else:
-                        cls.response("Sorry, no location for weather, try again..")
                 else:
-                    cls.response("Weather forecast is not working.\n"
+                    lucy.output_engine.respond("Sorry the weather API is not available now..")
+            else:
+                lucy.output_engine.respond("Sorry, no location for weather, try again..")
+        else:
+            lucy.output_engine.respond("Weather forecast is not working.\n"
                                  "You can get an Weather API key from: https://openweathermap.org/appid")
-            except Exception as e:
-                if InternetSkills.internet_availability():
+      except Exception as e:
+            if InternetSkills.internet_availability():
                     # If there is an error but the internet connect is good, then the weather API has problem
-                    cls.console_manager.console_output(error_log=e)
-                    cls.response("I faced an issue with the weather site..")
+                    cm.console_output_manager.console_output(error_log=e)
+                    lucy.output_engine.respond("I faced an issue with the weather site..")
 
     @classmethod
     def _get_weather_status_and_temperature(cls, city):
@@ -82,14 +50,13 @@ class WeatherSkills(AssistantSkill):
             return None, None
 
     @classmethod
-    def _get_city(cls, reg_ex):
-        if not reg_ex:
-            cls.console(info_log='Identify your location..')
-            city, latitude, longitude = LocationSkill.get_location()
-            if city:
-                cls.console(info_log='You location is: {0}'.format(city))
-            else:
-                cls.console(error_log="I couldn't find your location")
+    def _get_city(cls,subject ):
+        if subject : return subject
+
+        cm.console_output(info_log='Identify your location..')
+        city, latitude, longitude = LocationSkill.get_location()
+        if city:
+                cm.console_output(info_log='You location is: {0}'.format(city))
         else:
-            city = reg_ex.group(1)
+                cm.console_output(error_log="I couldn't find your location")
         return city

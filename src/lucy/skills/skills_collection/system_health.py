@@ -9,7 +9,7 @@ class SystemHealthSkills():
         Responds the memory consumption of the assistant process.
         """
         memory = cls._get_memory_consumption()
-        lucy.output_engine.say("I use {0:.2f} GB..".format(memory))
+        lucy.output_engine.respond("I use {0:.2f} GB..".format(memory))
 
     @classmethod
     def _get_memory_consumption(cls):

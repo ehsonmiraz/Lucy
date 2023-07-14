@@ -4,7 +4,7 @@ import time
 from lucy.core.console import ConsoleManager as cm
 from lucy.engines.stt import STTEngine
 from lucy.engines.tts import TTSEngine
-from lucy.core.settings import *
+from lucy.core.gpio_config import *
 class Move:
     @classmethod
     def run(cls):
