@@ -4,10 +4,9 @@ import pygame
 import pygame.camera
 import pygame.image
 from datetime import datetime, timedelta
-from multiprocessing import  Queue,Process
 from lucy.services.news import NewsGenerator
 from lucy.enumerations import FaceExEnum
-from lucy.gui import current_face_expression
+
 red = (255,0,0)
 blue = (40,150,203)
 green = (0,255,0)
@@ -32,11 +31,9 @@ class PyGameEngine():
         screenSize = (480, 320)
         self.screen = pygame.display.set_mode(screenSize)
         self.pg_engine.display.set_caption(self.screenTitle)
-        self.pg_engine.display.flip()
         self.screen.fill(black)
         self.myfont = pygame.font.SysFont('arial', 17)
         self.pg_engine.font.init()
-
 
 class FaceEx(PyGameEngine):
 
@@ -147,41 +144,37 @@ class FaceEx(PyGameEngine):
 
 
 class FaceExEngine:
-  func_choice=FaceExEnum.SMILE
-  @classmethod
-  def set_choice(cls, func_queue):
-      if (func_queue is None):
-          print("queue is none")
-          return
+  def set_choice(self,func_queue):
+    if(func_queue is None):
+        print("queue is none")
+        return
+    print(f"size is:{str(func_queue.qsize())}")
+    if(func_queue is not None and func_queue.qsize()>0):
+            choice=func_queue.get()
+            self.func_choice = choice
 
-      if (func_queue is not None and func_queue.qsize() > 0):
-          choice = func_queue.get()
-          cls.func_choice = choice
-  @classmethod
-  def run(cls,face_ex_queue=None):
-        face_ex=FaceEx()
+  def run(func_queue=None):
+        self=FaceEx()
+        self.pg_engine.display.flip()
+        self.smile()
         while True:
              function_choices={
-               FaceExEnum.SMILE:face_ex.smile,
-               FaceExEnum.THANK_YOU:face_ex.thanku,
-               FaceExEnum.LAUGH:face_ex.laugh,
-               FaceExEnum.TALK:face_ex.talk,
-               FaceExEnum.REC:face_ex.rec,
-               FaceExEnum.QUIT:face_ex.quit
+               FaceExEnum.SMILE:self.smile,
+               FaceExEnum.THANK_YOU:self.thanku,
+               FaceExEnum.LAUGH:self.laugh,
+               FaceExEnum.TALK:self.talk,
+               FaceExEnum.REC:self.rec,
+               FaceExEnum.QUIT:self.quit
                               }
-             cls.set_choice(face_ex_queue)
-
-             if(cls.func_choice):
-                function_choices[cls.func_choice]()
-             face_ex.screen.fill(black)
-             face_ex.check_for_quit()
+             FaceExEngine.set_choice(self,func_queue)
+             print(self.func_choice)
+             function_choices[self.func_choice]()
+             self.screen.fill(black)
+             self.check_for_quit()
 
 if __name__ == '__main__':
         try:
-            q=Queue()
-            q.put(FaceExEnum.THANK_YOU)
-            p=Process(target=FaceExEngine.run,args=(q,))
-            p.start()
+            FaceExEngine.run()
         except Exception as e:
             print("error occured: "+str(e))
             print (sys.exc_info())

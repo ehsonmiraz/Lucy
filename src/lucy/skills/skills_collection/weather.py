@@ -12,7 +12,7 @@ from lucy.core.console import ConsoleManager as cm
 
 class WeatherSkills:
     @classmethod
-    def tell_the_weather(cls, subject):
+    def tell_the_weather(cls, subject=None):
       try:
         if WEATHER_API['key']:
             city = cls._get_city(subject)
@@ -22,7 +22,7 @@ class WeatherSkills:
                         lucy.output_engine.respond("Current weather in %s is %s.\n"
                                          "The maximum temperature is %0.2f degree celcius. \n"
                                          "The minimum temperature is %0.2f degree celcius."
-                                         % (city, status, temperature['temp_max'], temperature['temp_min'])
+                                         % (city, status, temperature['temp_max']/10, temperature['temp_min']/10)
                                          )
                 else:
                     lucy.output_engine.respond("Sorry the weather API is not available now..")
@@ -34,23 +34,26 @@ class WeatherSkills:
       except Exception as e:
             if InternetSkills.internet_availability():
                     # If there is an error but the internet connect is good, then the weather API has problem
-                    cm.console_output_manager.console_output(error_log=e)
+                    cm.console_output(error_log=e)
                     lucy.output_engine.respond("I faced an issue with the weather site..")
 
     @classmethod
     def _get_weather_status_and_temperature(cls, city):
-        owm = OWM(API_key=WEATHER_API['key'])
-        if owm.is_API_online():
-            obs = owm.weather_at_place(city)
-            weather = obs.get_weather()
-            status = weather.get_status()
-            temperature = weather.get_temperature(WEATHER_API['unit'])
+        print(city)
+        owm = OWM(api_key=WEATHER_API['key'])
+        if 1:
+            obs = owm.weather_manager()
+            weather=obs.weather_at_place(city).weather.to_dict()
+
+            print(weather)
+            status = weather.get('status')
+            temperature = weather.get('temperature')
             return status, temperature
         else:
             return None, None
 
     @classmethod
-    def _get_city(cls,subject ):
+    def _get_city(cls,subject):
         if subject : return subject
 
         cm.console_output(info_log='Identify your location..')
@@ -60,3 +63,6 @@ class WeatherSkills:
         else:
                 cm.console_output(error_log="I couldn't find your location")
         return city
+
+if(__name__=='__main__'):
+    WeatherSkills.tell_the_weather("lucknow")

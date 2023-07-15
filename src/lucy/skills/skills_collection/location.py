@@ -8,14 +8,11 @@ import lucy
 from lucy.core.console import ConsoleManager as cm
 from lucy.settings import IPSTACK_API
 from lucy.skills.skills_collection.internet import InternetSkills
-from lucy.skills.skill import AssistantSkill
 
-
-
-class LocationSkill():
+class LocationSkill:
 
     @classmethod
-    def get_current_location(cls, **kwargs):
+    def get_current_location(cls,_):
         location_results = cls.get_location()
         if location_results:
             city, latitude, longitude = location_results

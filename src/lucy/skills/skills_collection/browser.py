@@ -14,14 +14,15 @@ from lucy.core.console import ConsoleManager as cm
 
 class BrowserSkills:
     @classmethod
-    def tell_me_about(cls,transcript,subject):
+    def tell_me_about(cls,subject):
         result=cls.wiki_search(subject)
         lucy.output_engine.respond(result)
 
     @classmethod
-    def wiki_search(subject):
+    def wiki_search(cls,subject):
         result = wikipedia.summary(subject, sentences=1)
         return result
 
-
+if(__name__=='__main__'):
+    BrowserSkills.tell_me_about("shahrukh khan")
 

@@ -10,7 +10,7 @@ from lucy.core.console import  ConsoleManager as cm
 class ActivationSkills:
 
     @classmethod
-    def assistant_power_off(cls,_ ,**kwargs):
+    def assistant_power_off(cls,_):
         """
         - Clear console
         - Shutdown the assistant service
@@ -21,7 +21,7 @@ class ActivationSkills:
         os.system('shutdown')
 
     @classmethod
-    def assistant_greeting(cls,_,**kwargs):
+    def assistant_greeting(cls,_):
         """
         Assistant greeting based on day hour.
         """

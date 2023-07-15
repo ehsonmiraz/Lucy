@@ -7,7 +7,7 @@ from lucy.engines.tts import TTSEngine
 from lucy.core.gpio_config import *
 class Move:
     @classmethod
-    def run(cls):
+    def run(cls,subject):
         print("running")
 
 
@@ -66,22 +66,23 @@ class Move:
 #        cm.console_output("restarting....", refresh_console=True)
 #
 #   @classmethod
-#   def run(cls):
+#   def run(cls, **kwargs):
 #    Move.setup()
 #    Move.forward()
 #    while True:
 #       query=lucy.sttEngine.recognize_input()
-#       if query in "turn right":
+#       if(not query): continue
+#       if "right" in query  :
 #           Move.right()
-#       elif query in "turn left":
+#       elif  "left" in query :
 #           Move.left()
-#       elif query in "now stop":
+#       elif "stop" in query  :
 #           Move.stop()
-#       elif query in "move forward move straight go ahead":
+#       elif "forward" in query or "straight" in query :
 #           Move.forward()
-#       elif query in "turn backward step back turn back":
+#       elif "backward" in query or "back" in query:
 #           Move.backward()
-#       elif query in "return done":
+#       elif "quit" in query  :
 #           Move.stop()
 #           break
 

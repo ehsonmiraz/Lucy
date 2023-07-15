@@ -1,20 +1,18 @@
 from multiprocessing import Process, Queue
-
+import time
 from lucy.enumerations import FaceExEnum
-from face_ex import FaceExEngine
-
-
+from lucy.gui.face_ex import FaceExEngine
+from lucy.gui import  current_face_expression
+from lucy.gui import  current_face_expression
 if __name__ == '__main__':
 
-    func_choice_q=Queue()
-    func_choice_q.put(FaceExEnum.TALK)
-    #parent_conn, child_conn = Pipe()
-    p = Process(target=FaceExEngine.run,args=(func_choice_q,))
-    p.start()
-    list=[FaceExEnum.SMILE,FaceExEnum.REC,FaceExEnum.THANK_YOU,FaceExEnum.TALK]
-
-    for i in list:
-       func_choice_q.put(i)
+    # p = Process(target=FaceExEngine.run, args=(current_face_expression.face_ex_queue,))
+    # p.start()
+    # list=[FaceExEnum.SMILE,FaceExEnum.REC,FaceExEnum.THANK_YOU,FaceExEnum.TALK]
+    #
+    # for i in list:
+    #    current_face_expression.face_ex_queue.put(i)
+    #    time.sleep(4)
 
 
     p.join()

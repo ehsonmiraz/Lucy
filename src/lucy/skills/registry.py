@@ -1,6 +1,7 @@
 from lucy.skills.skills_collection.activation import ActivationSkills
 from lucy.skills.skills_collection.browser import BrowserSkills
 from lucy.skills.skills_collection.info import AssistantInfoSkills
+from lucy.skills.skills_collection.math import MathSkills
 from lucy.skills.skills_collection.timedate import DatetimeSkills
 from lucy.skills.skills_collection.internet import InternetSkills
 
@@ -10,7 +11,7 @@ from lucy.skills.skills_collection.system_health import SystemHealthSkills
 from lucy.skills.skills_collection.weather import WeatherSkills
 from lucy.skills.skills_collection.gmail import Mail
 from lucy.skills.skills_collection.move import Move
-
+#from lucy.services.face_recognition_utilities import FaceRecognition
 CONTROL_SKILLS = [
     {   'name' :'Greet',
         'func': ActivationSkills.assistant_greeting,
@@ -125,8 +126,24 @@ BASIC_SKILLS = [
         'tags': 'my location, current location,location',
         'description': 'Ask to tell you your current location'
     },
-
-
+    {   'name' :'Arthematic calculations',
+        'enable': True,
+        'func': MathSkills.do_calculations,
+        'tags': 'solve, calculate, calculation, mathematic calculation,',
+        'description': 'Do arthematic calculation'
+    },
+    # {  'name' :'Recognise face',
+    #     'enable': True,
+    #     'func': FaceRecognition.recognise_subject,
+    #     'tags': 'recognise, face,face recognition',
+    #     'description': 'FaceRecogniton'
+    # },
+    # {   'name' :'Remember  face',
+    #     'enable': True,
+    #     'func': FaceRecognition.add_face_to_db,
+    #     'tags': 'save this face,save face ,remember face, remember this face',
+    #     'description': 'Saves the face in database'
+    # },
 
 ]
 ENABLED_BASIC_SKILLS = [skill for skill in BASIC_SKILLS if skill['enable']]

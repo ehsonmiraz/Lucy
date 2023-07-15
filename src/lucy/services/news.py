@@ -1,4 +1,6 @@
 import json
+import os
+
 import newspaper
 from src.lucy.core.console import ConsoleManager as cm
 
@@ -44,8 +46,11 @@ class NewsGenerator:
               outfile.write(json_object)
     @staticmethod
     def get_news():
-        news_text=""
-        with open("../files/news.json", "r") as outfile:
+        news_text = ""
+        utils_dir = os.path.dirname(__file__)
+        new_file = os.path.join(utils_dir, '..', 'files', 'news.json')
+
+        with open(new_file, "r") as outfile:
             articles_object = json.load(outfile)
 
         for article in articles_object:

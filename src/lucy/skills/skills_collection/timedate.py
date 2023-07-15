@@ -22,7 +22,7 @@ hour_mapping = {'0': 'twelve',
 class DatetimeSkills():
 
     @classmethod
-    def tell_the_time(cls, **kwargs):
+    def tell_the_time(cls,**kwargs):
         """
         Tells ths current time
         """

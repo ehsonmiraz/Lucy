@@ -1,11 +1,12 @@
 
-import threading
+
 import logging
 import pyttsx3
 import queue
 
 from lucy.core.console import ConsoleManager
-
+from lucy.gui import current_face_expression
+from lucy.enumerations import  FaceExEnum
 from lucy import settings
 
 
@@ -74,19 +75,19 @@ class TTSEngine(TTS):
                 message = self.message_queue.get()
                 if message:
                     batches = self._create_text_batches(raw_text=message)
-
+                    current_face_expression.face_ex_queue.put(FaceExEnum.TALK)
                     for batch in batches:
                         self.tts_engine.say(batch)
 
                         self.console_manager.console_output(batch, refresh_console=False)
                         self.tts_engine.runAndWait()
 
-
                         if self.stop_speaking:
                             self.console_manager.console_output('Speech interruption triggered')
                             self.logger.debug('Speech interruption triggered')
                             self.stop_speaking = False
                             break
+                    current_face_expression.face_ex_queue.put(FaceExEnum.SMILE)
                     self.console_manager.console_output('')
         except Exception as e:
             self.console_manager.console_output('Speech interruption triggered')
