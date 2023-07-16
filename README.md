@@ -5,6 +5,7 @@ It can recognize human speech, talk to user , execute basic commands and  move o
 
 #### Requirements
 
+* Raspberry pi 3/4
 * Operation system: **Raspberyy pi os v11 Bookworm)**
 * Python Version: **3.8.x**
 
