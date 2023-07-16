@@ -1,9 +1,3 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/ggeop/python-ai-assistant/badge)](https://www.codefactor.io/repository/github/ggeop/Python-ai-assistant)
-[![Maintainability](https://api.codeclimate.com/v1/badges/8c90305e22186cc2c9d5/maintainability)](https://codeclimate.com/github/ggeop/Python-ai-assistant/maintainability)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://app.travis-ci.com/ggeop/Python-ai-assistant.svg?branch=master)](https://app.travis-ci.com/ggeop/Python-ai-assistant)
-
-![alt text](https://github.com/ggeop/Python-ai-assistant/blob/master/imgs/Lucy_logo.png)
 
 # About LUCY - An Home Assitant Robot with Mobility 🧠
 Lucy is a voice commanding assistant service in [Python 3.8](https://www.python.org/downloads/release/python-360/)
@@ -71,7 +65,7 @@ cd Lucy
 
 *   Start the assistant service:
 ```bash
-bash run_Lucy.sh
+bash run_assistant.sh
 ```
 
 ### How to add a new Skill to assistant
@@ -89,7 +83,7 @@ You can easily add a new skill in two steps.
 
 
 ### Extract skill
-The skill extraction implement by regex with subject interaction by Sets
+The skill extraction implement by regex,tags and subject by Sets opertions.
 
 ---
 
