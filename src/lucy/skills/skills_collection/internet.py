@@ -11,7 +11,7 @@ from lucy.utils.startup import internet_connectivity_check
 class InternetSkills:
 
     @classmethod
-    def run_speedtest(cls, **kwargs):
+    def run_speedtest(cls, _):
         """
         Run an internet speed test. Speed test will show
         1) Download Speed
@@ -41,7 +41,7 @@ class InternetSkills:
             logging.error("Speedtest error with message: {0}".format(e))
 
     @classmethod
-    def internet_availability(cls,subject=None, **kwargs):
+    def internet_availability(cls,_):
         """
         Tells to the user is the internet is available or not.
         """

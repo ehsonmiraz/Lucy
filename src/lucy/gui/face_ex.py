@@ -26,7 +26,7 @@ class PyGameEngine():
         self.cam=self.pg_engine.camera
         self.cam.init()
         self.clock = self.pg_engine.time.Clock()
-        cm.console_output("fps: "+str(self.clock.get_fps()))
+
         self.screenTitle = "Graphics Shapes"
         # Creates a screen to draw upon
         screenSize = (480, 320)

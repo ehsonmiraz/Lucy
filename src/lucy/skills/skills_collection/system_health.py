@@ -1,10 +1,10 @@
 import os
 import psutil
 import lucy
-class SystemHealthSkills():
+class SystemHealthSkills:
 
     @classmethod
-    def tell_memory_consumption(cls,**kwargs):
+    def tell_memory_consumption(cls,_):
         """
         Responds the memory consumption of the assistant process.
         """

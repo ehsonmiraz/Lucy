@@ -15,7 +15,7 @@ SPEECH_CONFIG={
 
 
 
-__version__ = "1.0.0-beta"
+__version__ = "3.0.0-beta"
 ASSISTANT_NAME="LUCY"
 ASSISTANT_DESCRIPTION="My name is Lucy I am a home assistant robot." \
                       "I work on 64 bit microcomputer raspberry pi 3" \

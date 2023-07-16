@@ -19,10 +19,10 @@ hour_mapping = {'0': 'twelve',
                 }
 
 
-class DatetimeSkills():
+class DatetimeSkills:
 
     @classmethod
-    def tell_the_time(cls,**kwargs):
+    def tell_the_time(cls,_):
         """
         Tells ths current time
         """
@@ -32,7 +32,7 @@ class DatetimeSkills():
         lucy.output_engine.respond('The current time is: {0}'.format(converted_time))
 
     @classmethod
-    def tell_the_date(cls, **kwargs):
+    def tell_the_date(cls, _):
         """
         Tells ths current date
         """
@@ -77,4 +77,4 @@ class DatetimeSkills():
         return time
 
 if(__name__=='__main__'):
-     DatetimeSkills.tell_the_date()
+     DatetimeSkills.tell_the_date(None)
