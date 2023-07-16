@@ -14,5 +14,6 @@ SpeechRecognition==3.8.1
 speedtest-cli==2.1.1
 urllib3==1.24.3
 wikipedia==1.4.0
-wolframalpha==3.0.1
+face-recognition==1.4.0
+
 
