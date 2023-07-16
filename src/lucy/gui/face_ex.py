@@ -7,7 +7,8 @@ from datetime import datetime, timedelta
 from multiprocessing import  Queue,Process
 from lucy.services.news import NewsGenerator
 from lucy.enumerations import FaceExEnum
-from lucy.gui import current_face_expression
+from lucy.core.console import ConsoleManager as cm
+from lucy.settings import  FACE_EX_CONFIG
 red = (255,0,0)
 blue = (40,150,203)
 green = (0,255,0)
@@ -25,8 +26,7 @@ class PyGameEngine():
         self.cam=self.pg_engine.camera
         self.cam.init()
         self.clock = self.pg_engine.time.Clock()
-        print(self.clock.tick(30))
-        print("fps: "+str(self.clock.get_fps()))
+        cm.console_output("fps: "+str(self.clock.get_fps()))
         self.screenTitle = "Graphics Shapes"
         # Creates a screen to draw upon
         screenSize = (480, 320)
@@ -48,11 +48,11 @@ class FaceEx(PyGameEngine):
         self.c=0
         self.news = NewsGenerator().get_news()
         self.base_line=1
-        self.lower_jawline=123
+        self.lower_jawline=60
         self.lower_eyeline=89.3
         self.eye_pos=0.3
-        self.eye_speed=1.9
-        self.lips_speed=2.5
+        self.eye_speed=FACE_EX_CONFIG.get('eye_speed')
+        self.lips_speed=FACE_EX_CONFIG.get('lips_speed')
         self.func_choice=func_choice
 
     def check_for_quit(self):

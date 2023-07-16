@@ -2,8 +2,7 @@ import json
 import os
 
 import newspaper
-from src.lucy.core.console import ConsoleManager as cm
-
+from lucy.core.console import ConsoleManager as cm
 class NewsGenerator:
     MIN_WORDS=3
     def __init__(self):
@@ -58,4 +57,4 @@ class NewsGenerator:
 
         return news_text
 if __name__ =='__main__':
-  print(NewsGenerator().get_news())
+  print(NewsGenerator.get_news())

@@ -26,7 +26,6 @@ def play_activation_sound():
         #playsound(activation_soundfile)
     except Exception as e:
         cm.console_output(f"unable to play sound : {e}")
-    pass
 
 def start_face_expression_service():
     p = Process(target=FaceExEngine.run, args=(current_face_expression.face_ex_queue,))
@@ -49,3 +48,5 @@ def internet_connectivity_check(url='http://www.google.com/', timeout=2):
         return False
 
 
+if(__name__=='__main__'):
+    start_face_expression_service()

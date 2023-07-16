@@ -69,7 +69,7 @@ BASIC_SKILLS = [
         'description': 'Tells the current date'
     },
 
-    {   'name' :'Power of',
+    {   'name' :'search internet',
         'enable': True,
         'func': BrowserSkills.tell_me_about,
         'tags': 'search',

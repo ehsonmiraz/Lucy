@@ -1,7 +1,7 @@
 import re
 from nltk.corpus import wordnet
 import logging
-
+import sys
 from lucy.models.executable_skill import ExecutableSkill
 from lucy.skills.registry import get_skills
 from lucy.skills import registry
@@ -49,6 +49,7 @@ class SkillAnalyzer:
 
     def get_skills_objects(self):
         _skills_objects = [{
+            'name':skill.get('name'),
             'intent': skill.get('func'),
             'corpus': self.create_corpus_from_tags(skill.get('tags')),
             'description': skill.get('description'),
@@ -68,9 +69,11 @@ class SkillAnalyzer:
 
 
     def extract(self, user_transcript):
+        user_transcript=user_transcript.lower()
         if user_transcript == 'quit':
             print("Thank you for visiting.")
-            return
+            sys.exit()
+
         matched_intent = None
 
         for skill_object in self.skills_objects:
@@ -78,13 +81,14 @@ class SkillAnalyzer:
                 # if a keyword matches, select the corresponding intent from the keywords_dict dictionary
                 matched_intent =ExecutableSkill(
                     intent=skill_object.get('intent'),
+                    name=skill_object.get('name'),
                     description=skill_object.get('description'),
                     subject=self.getSubject(
                         transcript=user_transcript,
                         tags=skill_object.get('tags')
                     )
                 )
-        return  matched_intent
+        return matched_intent
 
 
 

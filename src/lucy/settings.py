@@ -63,6 +63,10 @@ ASSISTANT_SKILLS_INFO=[
 INPUTMODE=IntetrafceModesEnum.TextInput
 OUTPUTMODE=IntetrafceModesEnum.SpeechOutput
 
+FACE_EX_CONFIG={
+    'lips_speed':2.8,
+    'eye_speed':20
+}
 
 """
 Open weather map API settings
