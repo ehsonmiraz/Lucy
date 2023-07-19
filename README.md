@@ -1,6 +1,6 @@
 # About LUCY - An Home Assitant Robot with Mobility 🧠
 Lucy is a voice commanding assistant service in [Python 3.8](https://www.python.org/downloads/release/python-360/)
-It can recognize human speech, talk to users, execute basic commands, and  move on voice commands.
+It can recognize human speech, talk to users, execute basic commands, and  move on to voice commands.
 
 #### Requirements
 
@@ -13,9 +13,9 @@ It can recognize human speech, talk to users, execute basic commands, and  move 
 
 *   **Tells about something**, by searching on the internet (e.g 'Lucy tells me about oranges')
 *   **Tells the weather** for a place (e.g 'Lucy tell_the_skills me the weather in London')
-*   **Moves on voice command ** (e.g 'Lucy start walking, turn right ')
+*   **Moves on voice command** (e.g 'Lucy start walking, turn right ')
 *   **Sends email**, to anyone  (e.g 'Lucy send an email to Mr. Adnan')
-*   **Tells the internet speed (ping, uplink and downloading)** (e.g 'Lucy tell_the_skills me the internet speed')
+*   **Tells the internet speed (ping, uplink, and downloading)** (e.g 'Lucy tell_the_skills me the internet speed')
 *   **Recognise and remember  faces** (e.g 'Lucy who is this person, Lucy add this face to your database')
 *   **Tells the internet availability** (e.g 'Lucy is the internet connection ok?')
 *   **Tells the current time and/or date** (e.g 'Lucy tell me the time or date')
