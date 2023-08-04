@@ -20,15 +20,7 @@ class ConsoleManager:
     @classmethod
     def console_output(cls, text='', debug_log=None, info_log=None, warn_log=None, error_log=None, refresh_console=True):
         """
-        This method creates the assistant output.
-        The output has four sectors:
-            * GENERAL INFO: Info about assistant settigs
-            * SYSTEM: System info e.g assistant memory usage
-            * LOG: Assistant log last lines
-            * ASSISTANT: Assistant response output
-
         Output example:
-
 
               ║██      ╗ ██   ██╗ ███████╗   ██╗    ╗██
               ║██      ║ ██   ██╗ ██╔══╗      ██   ██
@@ -36,10 +28,6 @@ class ConsoleManager:
               ║██      ║ ██   ██║ ██╔══╗         ██
               ║██████ ╔╝ ███████║ ███████║       ██
                ╚════╝  ╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝
-          NOTE: CTRL + C If you want to Quit.
-        -------------------------------------- GENERAL INFO ---------------------------------------------
-        RESPONSE IN SPEECH: NOT ENABLED
-        INPUT MODE: TEXT
         ---------------------------------------- SYSTEM --------------------------------------------------
         RAM USAGE: 0.14 GB
         ----------------------------------------- LOG ----------------------------------------------------
