@@ -1,8 +1,3 @@
-'''from speak import speak as s
-import os
-import RPi.GPIO as GPIO
-from mic import mic
-from call import output'''
 
 from speak import speak as s
 import os
