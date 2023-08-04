@@ -1,5 +1,3 @@
-
-
 import logging
 import pyttsx3
 import queue
