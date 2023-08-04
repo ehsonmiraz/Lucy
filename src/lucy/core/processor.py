@@ -1,4 +1,3 @@
-
 import lucy
 
 from sklearn.feature_extraction.text import TfidfVectorizer
