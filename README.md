@@ -1,4 +1,4 @@
-# About LUCY - An Home Assitant Robot with Mobility 🧠
+# About LUCY - A Home Assistant Robot with Mobility 🧠
 Lucy is a voice commanding assistant service in [Python 3.8](https://www.python.org/downloads/release/python-360/)
 It can recognize human speech, talk to users, execute basic commands, and  move on to voice commands.
 
